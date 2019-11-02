@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Financial Planner</string>
+    <string name="title_activity_main">Financial Planner</string>
+
+<!--    MAIN ACTIVITY-->
+    <string name="open_messages">Open SMS</string>
+</resources>
