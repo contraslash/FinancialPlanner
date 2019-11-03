@@ -4,4 +4,6 @@
 
 <!--    MAIN ACTIVITY-->
     <string name="open_messages">Open SMS</string>
+    <string name="main_title">Home</string>
+    <string name="sms_title">SMS</string>
 </resources>
