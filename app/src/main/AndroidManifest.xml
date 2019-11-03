@@ -11,10 +11,8 @@
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme">
-        <activity
-                android:name=".applications.core.layouts.MainActivity"
-                android:label="@string/title_activity_main"></activity>
+            android:theme="@style/AppTheme"
+            android:name=".config.MainApplication">
         <activity android:name=".applications.core.activities.FinancialPlanner">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
