@@ -4,6 +4,8 @@
         package="com.contraslash.android.financial_planner">
 
     <dist:module dist:instant="true" />
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
 
     <application
             android:allowBackup="true"
