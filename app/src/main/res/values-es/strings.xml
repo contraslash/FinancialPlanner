@@ -5,4 +5,5 @@
     <string name="open_messages">Abrir Mensajes</string>
     <string name="main_title">Inicio</string>
     <string name="sms_title">Mensajes de Texto</string>
+    <string name="sms_required">El permiso de lectura de mensajes de texto es requerid</string>
 </resources>
