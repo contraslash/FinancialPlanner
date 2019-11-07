@@ -12,15 +12,18 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.contraslash.android.financial_planner.R
 import com.contraslash.android.financial_planner.applications.core.models.SMS
+import kotlinx.coroutines.channels.ActorScope
 
 class SMSController(var activity: Activity) {
     val PERMISSIONCODE_READ_SMS = 5801
     val TAG = "SMSController"
     var hasPermission: Boolean = false
         private set
+    var allSMS = mutableListOf<SMS>()
+        private set
 
     fun checkPermissions () {
-        Log.d(TAG, "Permission granted constant${PackageManager.PERMISSION_GRANTED}")
+        Log.d(TAG, "Permission granted constant ${PackageManager.PERMISSION_GRANTED}")
         Log.d(TAG, "Permission granted constant ${ContextCompat.checkSelfPermission(
             this.activity,
             Manifest.permission.READ_SMS
@@ -48,7 +51,7 @@ class SMSController(var activity: Activity) {
                 Log.d(TAG, "Showing NOT so regular permission ")
                 ActivityCompat.requestPermissions(
                     this.activity,
-                    arrayOf(Manifest.permission.READ_CONTACTS),
+                    arrayOf(Manifest.permission.READ_SMS),
                     PERMISSIONCODE_READ_SMS
                 )
             }
@@ -79,7 +82,8 @@ class SMSController(var activity: Activity) {
         }
     }
 
-    private fun loadMessages() {
+    fun loadMessages() {
+        if (!this.hasPermission) return
         ArrayList<SMS>()
         val contentResolver = this.activity.getContentResolver()
         val cursor = contentResolver.query(
@@ -93,10 +97,17 @@ class SMSController(var activity: Activity) {
         if (cursor!!.moveToFirst())
         {
             val addressID = cursor.getColumnIndex("address")
-            val meessageID = cursor.getColumnIndex("body")
+            val messageID = cursor.getColumnIndex("body")
             val dateID = cursor.getColumnIndex("date")
             do {
-                Log.d(TAG, cursor.getString(addressID))
+                allSMS.add(
+                    SMS(
+                        cursor.getString(messageID),
+                        cursor.getString(addressID),
+                        cursor.getLong(dateID)
+                    )
+                )
+                Log.d(TAG, cursor.getString(messageID))
             } while (cursor.moveToNext())
 
         }

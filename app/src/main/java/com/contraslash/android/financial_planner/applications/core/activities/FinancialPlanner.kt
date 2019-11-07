@@ -11,14 +11,20 @@ class FinancialPlanner : Activity() {
 
     lateinit var smsController: SMSController
 
+    companion object Actions {
+        lateinit var smsController: SMSController
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        this.smsController = SMSController(this)
+        this.smsController.checkPermissions()
+        Actions.smsController = smsController
         setContent {
             MainFinancialPlannerLayout()
         }
 
-        this.smsController = SMSController(this)
-        this.smsController.checkPermissions()
+
     }
 
     override fun onRequestPermissionsResult(
