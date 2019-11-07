@@ -12,6 +12,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.contraslash.android.financial_planner.R
 import com.contraslash.android.financial_planner.applications.core.models.SMS
+import com.contraslash.android.financial_planner.config.AppConstants
 import kotlinx.coroutines.channels.ActorScope
 
 class SMSController(var activity: Activity) {
@@ -100,15 +101,18 @@ class SMSController(var activity: Activity) {
             val messageID = cursor.getColumnIndex("body")
             val dateID = cursor.getColumnIndex("date")
             do {
-                allSMS.add(
-                    SMS(
-                        cursor.getString(messageID),
-                        cursor.getString(addressID),
-                        cursor.getLong(dateID)
+                // TODO: Remove fixed value from sender BANCOLOMBIA
+                val senderAddress = cursor.getString(addressID)
+                if (senderAddress == AppConstants.BANCOLOMBIA_SENDER_ADDRESS)
+                    allSMS.add(
+                        SMS(
+                            cursor.getString(messageID),
+                            senderAddress,
+                            cursor.getLong(dateID)
+                        )
                     )
-                )
-                Log.d(TAG, cursor.getString(messageID))
             } while (cursor.moveToNext())
+            Log.d(TAG, "Total elements ${allSMS.size}")
 
         }
 

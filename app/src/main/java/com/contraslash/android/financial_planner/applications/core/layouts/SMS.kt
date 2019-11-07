@@ -29,6 +29,8 @@ fun SMSScreen(openDrawer: () -> Unit) {
 @Composable
 fun SMSElement(sms: SMS) {
     Column {
+        Text(text = sms.originatingAddress)
         Text(text = sms.body)
+        Text(text = "${sms.timestamp}")
     }
 }

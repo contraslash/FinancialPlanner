@@ -24,7 +24,7 @@ import com.contraslash.android.financial_planner.config.*
 @Composable
 fun MainFinancialPlannerLayout() {
     MaterialTheme (
-        colors = darkThemeColors
+        colors = customThemeColors
     )
     {
         val (drawerState, onDrawerStateChange) = +state { DrawerState.Closed }
